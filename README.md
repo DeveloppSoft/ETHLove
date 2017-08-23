@@ -4,6 +4,8 @@ ETHLove is a DAPP allowing you to perform on-chain marriage agreements.
 
 Please read the paper at `./ui/ethlove.pdf`.
 
+> UI is live on [ethlove.github.io](https://ethlove.github.io).
+
 
 # Development
 
@@ -26,4 +28,4 @@ The UI is just some classic HTML, CSS and JS, it is located in `./ui` and need s
 
  -  [ ] Add paper
  -  [ ] Rework UI
- -  [ ] Deploy UI
+ -  [X] Deploy UI
