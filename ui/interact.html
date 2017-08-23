@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <link type="text/css" href="/css/material_icons.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/footer.css"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/interact.js"></script>
+    <script type="text/javascript" src="/js/web3_loader.js"></script>
+    <script type="text/javascript" src="/js/support.js"></script>
+
+    <script>
+      (function($){
+        $(function(){
+
+          $('.button-collapse').sideNav();
+
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+
+    <div id="error_web3" class="modal">
+      <div class="modal-content">
+        <h4>Cannot load web3.js</h4>
+        <p>Uh oh! It seems we cannot load the web3.js library, please try using <a href="https://metamask.io/">Metamask</a>, <a href="https://github.com/ethereum/mist/releases">Mist</a>, <a href="https://parity.io/">Parity</a> or <a href="https://status.im/">Status</a>.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect btn-flat">Ok</a>
+      </div>
+    </div>
+
+    <div id="error_generic" class="modal">
+      <div class="modal-content">
+        <h4>An error occured</h4>
+        <p>Oh no! An error occured while sending the transaction</p>
+        <p id="error_content"></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect btn-flat">Ok</a>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">ETHLove</a>
+        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/deploy.html">Deploy</a></li>
+          <li><a href="/interact.html">Load</a></li>
+        </ul>
+
+        <ul class="side-nav" id="mobile-menu">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/deploy.html">Deploy</a></li>
+          <li><a href="/interact.html">Load</a></li>
+      </ul>
+      </div>
+    </nav>
+
+    <main>
+      <div class="section container">
+        <div class="row center">
+
+          <div class="row col s10 offset-s1" id="loader">
+            <form>
+              <div class="input-field">
+                <input id="agreement_addr" type="text">
+                <label for="agreement_addr">Agreement address</label>
+              </div>
+              <a class="waves-effect waves-light btn col s12" id="load_btn">Load</a>
+            </form>
+          </div>
+
+          <div class="row col s10 offset-s1" id="control" style="display: none">
+            <ul class="collapsible popout" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header active">Status</div>
+                <div class="collapsible-body row">
+                  <ul class="collection">
+                    <li class="collection-item" id="status_state"></li>
+                    <li class="collection-item" id="status_url"></li>
+                    <li class="collection-item" id="status_party_one"></li>
+                    <li class="collection-item" id="status_party_two"></li>
+                    <li class="collection-item">Refund available on: <span id="status_time_left"></span></p>
+                  </ul>
+                  <!--<ul class="collection" id="witness_list"></ul>-->
+                </div>
+              </li>
+              <li id="add_witness">
+                <div class="collapsible-header">Add witness</div>
+                <div class="collapsible-body row">
+                  <form>
+                    <div class="input-field">
+                      <input id="witness_addr" type="text">
+                      <label for="witness_addr">Witness address</label>
+                    </div>
+                    <a class="waves-effect waves-light btn col s12" id="witness_btn">Add</a>
+                  </form>
+                </div>
+              </li>
+              <li id="end_initialization">
+                <div class="collapsible-header">End initialization</div>
+                <div class="collapsible-body row"><a class="waves-effect waves-light btn col s12" id="initialization_btn">End initialization</a></div>
+              </li>
+              <li id="accept_union">
+                <div class="collapsible-header">Accept union</div>
+                <div class="collapsible-body row"><a class="waves-effect waves-light btn col s12" id="accept_btn">Accept union</a></div>
+              </li>
+              <li id="refund">
+                <div class="collapsible-header">Ask refund</div>
+                <div class="collapsible-body row"><a class="waves-effect waves-light btn col s12" id="refund_btn">Ask refund</a></div>
+              </li>
+              <li id="divorce">
+                <div class="collapsible-header">Divorce</div>
+                <div class="collapsible-body row"><a class="waves-effect waves-light btn col s12" id="divorce_btn">Ask divorce</a></div>
+              </li>
+              <li>
+                <div class="collapsible-header">Events</div>
+                <div class="collapsible-body row">
+                  <ul class="collection" id="events"></ul>
+                </div>
+              </li>
+            </ul>         
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+       <div class="container">
+         <div class="row">
+           <div class="col l6 s12">
+             <h5 class="white-text">About</h5>
+              <p class="grey-text text-lighten-4">ETHLove is a marriage agreement built on top of Ethereum, it has been conceived and implemented by Eliott Teissonniere a decentralization and privacy advocate as well as an infamous developer.</p>
+           </div>
+           <div class="col l4 offset-l2 s12">
+             <p class="grey-text text-lighten-4 right">0x7726104068B4d19f416Ea7d44A15d07AB1f89980</p>
+             <ul>
+               <li id="donate"><a class="waves-effect waves-light btn right tooltipped" data-tooltip="Send us 0.05 ETH" id="support">Support us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          &copy; 2017 Copyright Eliott Teissonniere
+          <a class="grey-text text-lighten-4 right" target="_blank" href="/ethlove.pdf">developpsoft.github.io</a>
+        </div>
+      </div>
+    </footer> 
+
+  </body>
+</html>

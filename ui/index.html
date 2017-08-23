@@ -1,0 +1,96 @@
+<html>
+  <head>
+    <link type="text/css" href="/css/material_icons.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/footer.css"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/web3_loader.js"></script>
+    <script type="text/javascript" src="/js/support.js"></script>
+
+    <script>
+      (function($){
+        $(function(){
+
+          $('.button-collapse').sideNav();
+
+        }); // end of document ready
+      })(jQuery); // end of jQuery name space
+    </script>
+
+    <div id="error_web3" class="modal">
+      <div class="modal-content">
+        <h4>Cannot load web3.js</h4>
+        <p>Uh oh! It seems we cannot load the web3.js library, please try using <a href="https://metamask.io/">Metamask</a>, <a href="https://github.com/ethereum/mist/releases">Mist</a>, <a href="https://parity.io/">Parity</a> or <a href="https://status.im/">Status</a>.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect btn-flat">Ok</a>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">ETHLove</a>
+        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/deploy.html">Deploy</a></li>
+          <li><a href="/interact.html">Load</a></li>
+        </ul>
+
+        <ul class="side-nav" id="mobile-menu">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/deploy.html">Deploy</a></li>
+          <li><a href="/interact.html">Load</a></li>
+      </ul>
+      </div>
+    </nav>
+
+    <main>
+      <div class="section container">
+        <div class="row center">
+          <img style="max-width: 40%" src="/img/logo.png">
+          <p>ETHLove will let you deploy and interact with marriage agreements, read the paper <a target="_blank" href="/ethlove.pdf">here</a>.</p>
+        </div>
+
+        <div class="row center">
+          <a href="/deploy.html" class="col s10 offset-s1 btn-large waves-effect waves-light">Make a new agreement</a>
+        </div>
+
+        <div class="row center">
+          <a href="/interact.html" class="col s10 offset-s1 btn-large waves-effect waves-light">Interact with an agreement</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+       <div class="container">
+         <div class="row">
+           <div class="col l6 s12">
+             <h5 class="white-text">About</h5>
+              <p class="grey-text text-lighten-4">ETHLove is a marriage agreement built on top of Ethereum, it has been conceived and implemented by Eliott Teissonniere a decentralization and privacy advocate as well as an infamous developer.</p>
+           </div>
+           <div class="col l4 offset-l2 s12">
+             <p class="grey-text text-lighten-4 right">0x7726104068B4d19f416Ea7d44A15d07AB1f89980</p>
+             <ul>
+               <li id="donate"><a class="waves-effect waves-light btn right tooltipped" data-tooltip="Send us 0.05 ETH" id="support">Support us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          &copy; 2017 Copyright Eliott Teissonniere
+          <a class="grey-text text-lighten-4 right" target="_blank" href="https://developpsoft.github.io">developpsoft.github.io</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
