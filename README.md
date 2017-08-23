@@ -26,3 +26,4 @@ The UI is just some classic HTML, CSS and JS, it is located in `./ui` and need s
 
 [ ] Add paper
 [ ] Rework UI
+[ ] Deploy UI
