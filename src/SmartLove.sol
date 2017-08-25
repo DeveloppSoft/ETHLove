@@ -21,6 +21,7 @@ contract SmartLove is SafeMath {
   bytes32 public url_document;
 
   uint public refund_on;
+  uint public valid_until;
 
   uint public required_signatures;
 
@@ -37,7 +38,8 @@ contract SmartLove is SafeMath {
   /// @param second_party party two
   /// @param url marriage contract document
   /// @param days_before_refund if that amount of days elapsed before the union is agreed, parties can refund their bid
-  function SmartLove(address first_party, address second_party, bytes32 url, uint days_before_refund) {
+  /// @param agreement_duration_years how much years is the agreement valid
+  function SmartLove(address first_party, address second_party, bytes32 url, uint days_before_refund, uint agreement_duration_years) {
     require(first_party != SEND_FUNDS_TO);
     require(second_party != SEND_FUNDS_TO);
 
@@ -50,6 +52,8 @@ contract SmartLove is SafeMath {
     required_signatures = 2;
 
     current_state = State.Initialization;
+
+    valid_until = now + agreement_duration_years * 1 years;
   }
 
   /// @notice used by one of the parties to add a witness, the more witnesses, the more "value" has the contract
@@ -104,6 +108,7 @@ contract SmartLove is SafeMath {
   function refund() {
     require(refund_on <= now);
     require(isInitialized() && !isMarried());
+    require(bidders.length > 0);
 
     // Only a party or witness can call that
     require(msg.sender == party_one || msg.sender == party_two || is_witness[msg.sender]);
@@ -142,10 +147,14 @@ contract SmartLove is SafeMath {
   }
 
   function isMarried() constant returns (bool) {
-    return current_state == State.Married;
+    return current_state == State.Married && isValid();
   }
 
   function isDivorced() constant returns (bool) {
     return current_state == State.Divorced;
+  }
+
+  function isValid() constant returns (bool) {
+    return now < valid_until;
   }
 }

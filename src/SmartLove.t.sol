@@ -46,7 +46,7 @@ contract SmartLoveTest is DSTest {
 
     function setUp() {
         party = new FakeParty();
-        love = new SmartLove(this, address(party), stringToBytes32("<url here>"), 7);
+        love = new SmartLove(this, address(party), stringToBytes32("<url here>"), 7, 1);
         party.setLove(love);
         party.transfer(ACCEPT_BID);
     }
@@ -61,7 +61,7 @@ contract SmartLoveTest is DSTest {
     }
 
     function testFail_party_cannot_be_collector() {
-        love = new SmartLove(0x1, 0x7726104068B4d19f416Ea7d44A15d07AB1f89980,  stringToBytes32("<url here>"), 7);
+        love = new SmartLove(0x1, 0x7726104068B4d19f416Ea7d44A15d07AB1f89980,  stringToBytes32("<url here>"), 7, 1);
     }
 
     function test_party_can_add_witness() {
@@ -78,7 +78,7 @@ contract SmartLoveTest is DSTest {
     }
 
     function testFail_non_party_cannot_add_witness() {
-        love = new SmartLove(0x1, 0x2, stringToBytes32("<url here>"), 7);
+        love = new SmartLove(0x1, 0x2, stringToBytes32("<url here>"), 7, 1);
 
         love.addWitness(0x3);
     }
@@ -106,7 +106,7 @@ contract SmartLoveTest is DSTest {
     }
 
     function testFail_non_party_cannot_end_initialization() {
-        love = new SmartLove(0x1, 0x2, stringToBytes32("<url here>"), 7);
+        love = new SmartLove(0x1, 0x2, stringToBytes32("<url here>"), 7, 1);
 
         love.endInitialization();
     }
@@ -165,7 +165,7 @@ contract SmartLoveTest is DSTest {
     function test_refund() {
         uint oldBalance = this.balance;
 
-        love = new SmartLove(this, 0x1, stringToBytes32("<url here>"), 0);
+        love = new SmartLove(this, 0x1, stringToBytes32("<url here>"), 0, 1);
 
         love.endInitialization();
 
@@ -202,7 +202,7 @@ contract SmartLoveTest is DSTest {
     function testFail_refund_witness() {
         uint oldBalance = this.balance;
 
-        love = new SmartLove(this, 0x1, stringToBytes32("<url here>"), 0);
+        love = new SmartLove(this, 0x1, stringToBytes32("<url here>"), 0, 1);
 
         love.endInitialization();
 
@@ -253,7 +253,7 @@ contract SmartLoveTest is DSTest {
     }
 
     function testFail_only_party_can_divorce() {
-        love = new SmartLove(this, address(party), stringToBytes32("<url here>"), 0);
+        love = new SmartLove(this, address(party), stringToBytes32("<url here>"), 0, 1);
 
         love.endInitialization();
 
@@ -290,6 +290,19 @@ contract SmartLoveTest is DSTest {
 
         assert(!love.isMarried());
         assert(love.isDivorced());
+    }
+
+    function test_validity_period() {
+        love = new SmartLove(this, address(party), stringToBytes32("<url here>"), 0, 0);
+        party.setLove(love);
+
+        love.endInitialization();
+
+        love.acceptUnion.value(ACCEPT_BID)();
+        party.accept();
+
+        assert(!love.isMarried());
+        assert(!love.isValid());
     }
 
     function () payable {
